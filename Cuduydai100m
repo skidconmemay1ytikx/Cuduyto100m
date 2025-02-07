@@ -1,7 +1,11 @@
-local player = game.Players.LocalPlayer
-
-if player.Name == "PAayft2" or player.Name == "b123vno" or player.Name == "phubentao" or player.Name == "anhtthuc03" or player.Name == "emfankia123" or player.Name == "foxgoodboy123" or player.Name == "hoangbautroi11" or player.Name == "YumiSenseii" or player.Name == "ArvinSenpai1" then
-    print("Quỳ xuống")
-else
-    player:Kick("địt mẹ bú liếm con cặc t địt cả lò nhà mày mẹ mày là con phò Quỳ Xuống")
-end
+return {
+["b123vnoo"] = true,
+    ["phubentau"] = true,
+    ["anhtthuc03"] = true,
+    ["ArvinSenpai1"] = true,
+    ["YumiSenseii"] = true,
+    ["hoangbautroi11"] = true,
+    ["foxgoodboy123"] = true,
+    ["emfankia123"] = true,
+    ["seven09812"] = true,
+}

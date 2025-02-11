@@ -1,7 +1,4 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/DenDenZZZ/Orion-UI-Library/refs/heads/main/source')))()
-local Players = game:GetService("Players")
-local Player = Players.LocalPlayer
-
 local Window = OrionLib:MakeWindow({
     Name = "Test",
     HidePremium = false,
@@ -17,14 +14,6 @@ local Window = OrionLib:MakeWindow({
         Icon = "rbxassetid://7733960981",
         PremiumOnly = false
     })
-
-    HomeTab:AddParagraph("Važno Obaveštenje ⚠️", 
-    "Ukoliko dođe do zabrane (bana), velika je verovatnoća da je uzrok izvršilac (executor) koji koristite. Ako koristite Solara, savetujemo da ga ne koristite na glavnom nalogu kako biste izbegli eventualne sankcije. 🔒\n\n" ..
-    "Da bismo vam olakšali iskustvo, pružamo podršku i savete na našem Discord serveru. Ako imate dodatna pitanja ili trebate pomoć, slobodno se pridružite zajednici i obratite se iskusnim članovima koji su tu da pomognu. 🤝")
-
-    HomeTab:AddParagraph("Novi Midnight Update 🌙", 
-    "Uz ovaj ažurirani Midnight Update, dodali smo nove funkcionalnosti i dodatne tabove koji omogućavaju bolju organizaciju skripti. Sada je sve preglednije i jednostavnije za korišćenje, pružajući korisnicima bolji doživljaj i efikasnije upravljanje. 🎉\n\n" ..
-    "Nadamo se da će vam nove opcije olakšati rad i poboljšati vaše iskustvo igranja! Uživajte u svim novim mogućnostima koje su dostupne.")
 
 
 

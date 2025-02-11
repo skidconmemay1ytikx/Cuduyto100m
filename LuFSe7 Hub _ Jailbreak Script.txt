@@ -1,0 +1,368 @@
+-- Rayfield GUI Library
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+ 
+local Window = Rayfield:CreateWindow({
+    Name = "LuFSe7 Hub | Jailbreak Script",
+    LoadingTitle = "Loading LuFSe7 Hub | Jailbreak Script",
+    LoadingSubtitle = "By LuFSe7",
+    ConfigurationSaving = {
+        Enabled = true,
+        FolderName = nil,
+        FileName = "Jailbreak Script"
+    },
+    Discord = {
+        Enabled = true,
+        Invite = "gaAeJnUp",
+        RememberJoins = true
+   },
+   KeySystem = true, -- Set this to true to use our key system
+   KeySettings = {
+      Title = "Key",
+      Subtitle = "Key System",
+      Note = "Key In Video Desc",
+      FileName = "LuFSe7 Hub | Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+      SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+      GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+      Key = {"GSu21KcowWcxK"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+   }
+})
+
+-- Vehicle Tab
+local VehicleTab = Window:CreateTab("Vehicles", nil)
+local VehicleSection = VehicleTab:CreateSection("Vehicle Options")
+
+local VehicleSpawnButton = VehicleTab:CreateButton({
+    Name = "Spawn Vehicle",
+    Callback = function()
+        local player = game.Players.LocalPlayer
+        -- Example: spawn a car
+        -- Add vehicle spawning logic here
+        print("Vehicle Spawned")
+    end
+})
+
+local VehicleSpeedSlider = VehicleTab:CreateSlider({
+    Name = "Vehicle Speed",
+    Range = {50, 1000},
+    Increment = 10,
+    Suffix = "Speed",
+    CurrentValue = 100,
+    Flag = "VehicleSpeedSlider",
+    Callback = function(Value)
+        -- Adjust vehicle speed
+        print("Vehicle Speed:", Value)
+        -- Add vehicle speed adjustment logic here
+    end
+})
+
+-- Player Tab
+local PlayerTab = Window:CreateTab("Players", nil)
+local PlayerSection = PlayerTab:CreateSection("Player Options")
+
+local GodModeToggle = PlayerTab:CreateToggle({
+    Name = "God Mode",
+    CurrentValue = false,
+    Flag = "GodModeToggle",
+    Callback = function(Value)
+        if Value then
+            -- Enable God Mode
+            print("God Mode Enabled")
+            -- Add God Mode logic here
+        else
+            -- Disable God Mode
+            print("God Mode Disabled")
+            -- Add code to disable God Mode here
+        end
+    end
+})
+
+local InfiniteJumpToggle = PlayerTab:CreateToggle({
+    Name = "Infinite Jump",
+    CurrentValue = false,
+    Flag = "InfiniteJumpToggle",
+    Callback = function(Value)
+        local player = game.Players.LocalPlayer
+        if Value then
+            -- Enable Infinite Jump
+            local UserInputService = game:GetService("UserInputService")
+            UserInputService.InputBegan:Connect(function(input, gameProcessed)
+                if input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode == Enum.KeyCode.Space and not gameProcessed then
+                    local humanoid = player.Character and player.Character:FindFirstChildOfClass("Humanoid")
+                    if humanoid then
+                        humanoid:ChangeState(Enum.HumanoidStateType.Physics)
+                        humanoid:Move(Vector3.new(0, 50, 0))
+                    end
+                end
+            end)
+            print("Infinite Jump Enabled")
+        else
+            print("Infinite Jump Disabled")
+        end
+    end
+})
+
+local FlyToggle = PlayerTab:CreateToggle({
+    Name = "Fly",
+    CurrentValue = false,
+    Flag = "FlyToggle",
+    Callback = function(Value)
+        if Value then
+            -- Enable Fly mode
+            local player = game.Players.LocalPlayer
+            local flying = false
+            local flySpeed = 50
+            local UserInputService = game:GetService("UserInputService")
+            local BodyVelocity = Instance.new("BodyVelocity", player.Character.PrimaryPart)
+            BodyVelocity.MaxForce = Vector3.new(4000, 4000, 4000)
+
+            UserInputService.InputBegan:Connect(function(input)
+                if input.KeyCode == Enum.KeyCode.Space then
+                    flying = true
+                end
+            end)
+
+            UserInputService.InputEnded:Connect(function(input)
+                if input.KeyCode == Enum.KeyCode.Space then
+                    flying = false
+                end
+            end)
+
+            game:GetService("RunService").RenderStepped:Connect(function()
+                if flying then
+                    BodyVelocity.Velocity = (game.Players.LocalPlayer:GetMouse().Hit.p - player.Character.PrimaryPart.Position).unit * flySpeed
+                else
+                    BodyVelocity.Velocity = Vector3.new(0, 0, 0)
+                end
+            end)
+            print("Fly Enabled")
+        else
+            print("Fly Disabled")
+        end
+    end
+})
+
+-- ESP Tab
+local ESCTab = Window:CreateTab("ESP", nil)
+local ESCSection = ESCTab:CreateSection("ESP Options")
+
+local ESPToggle = ESCTab:CreateToggle({
+    Name = "Enable ESP",
+    CurrentValue = false,
+    Flag = "ESPToggle",
+    Callback = function(Value)
+        if Value then
+            -- Start ESP
+            print("ESP Enabled")
+            -- Add your ESP logic here
+        else
+            -- Stop ESP
+            print("ESP Disabled")
+            -- Add your code to stop ESP here
+        end
+    end
+})
+
+-- Aimbot Tab
+local AimbotTab = Window:CreateTab("Aimbot", nil)
+local AimbotSection = AimbotTab:CreateSection("Aimbot Options")
+
+local AimbotToggle = AimbotTab:CreateToggle({
+    Name = "Enable Aimbot",
+    CurrentValue = false,
+    Flag = "AimbotToggle",
+    Callback = function(Value)
+        if Value then
+            -- Start Aimbot
+            print("Aimbot Enabled")
+            -- Add your aimbot logic here
+        else
+            -- Stop Aimbot
+            print("Aimbot Disabled")
+            -- Add your code to stop Aimbot here
+        end
+    end
+})
+
+local AimbotHeadshotToggle = AimbotTab:CreateToggle({
+    Name = "Headshot Only",
+    CurrentValue = false,
+    Flag = "AimbotHeadshotToggle",
+    Callback = function(Value)
+        if Value then
+            -- Enable headshot only mode
+            print("Aimbot Headshots Only Enabled")
+            -- Add logic for headshot only aiming here
+        else
+            print("Aimbot Headshots Only Disabled")
+        end
+    end
+})
+
+local AimbotTeamCheckToggle = AimbotTab:CreateToggle({
+    Name = "Team Check",
+    CurrentValue = false,
+    Flag = "AimbotTeamCheckToggle",
+    Callback = function(Value)
+        if Value then
+            -- Enable team check
+            print("Aimbot Team Check Enabled")
+            -- Add logic to check if targets are on the same team
+        else
+            print("Aimbot Team Check Disabled")
+        end
+    end
+})
+
+local AimbotSmoothnessSlider = AimbotTab:CreateSlider({
+    Name = "Aimbot Smoothness",
+    Range = {0, 100},
+    Increment = 1,
+    Suffix = "%",
+    CurrentValue = 0,
+    Flag = "AimbotSmoothnessSlider",
+    Callback = function(Value)
+        -- Adjust aimbot smoothness
+        print("Aimbot Smoothness:", Value)
+        -- Add logic to adjust aimbot smoothness here
+    end
+})
+
+-- Hitbox Tab
+local HitboxTab = Window:CreateTab("Hitbox", nil)
+local HitboxSection = HitboxTab:CreateSection("Hitbox Options")
+
+local HitboxSizeSlider = HitboxTab:CreateSlider({
+    Name = "Hitbox Size",
+    Range = {1, 100},
+    Increment = 1,
+    Suffix = "Size",
+    CurrentValue = 10,
+    Flag = "HitboxSizeSlider",
+    Callback = function(Value)
+        -- Adjust hitbox size
+        print("Hitbox Size:", Value)
+        -- Add your hitbox size adjustment logic here
+    end
+})
+
+local HitboxColorPicker = HitboxTab:CreateColorPicker({
+    Name = "Hitbox Color",
+    CurrentColor = Color3.fromRGB(255, 0, 0),
+    Flag = "HitboxColorPicker",
+    Callback = function(Color)
+        -- Adjust hitbox color
+        print("Hitbox Color:", Color)
+        -- Add your hitbox color adjustment logic here
+    end
+})
+
+-- Additional Features Tab
+local AdditionalFeaturesTab = Window:CreateTab("Additional Features", nil)
+local AdditionalFeaturesSection = AdditionalFeaturesTab:CreateSection("Additional Features")
+
+local AutoRobToggle = AdditionalFeaturesTab:CreateToggle({
+    Name = "Auto Rob",
+    CurrentValue = false,
+    Flag = "AutoRobToggle",
+    Callback = function(Value)
+        if Value then
+            -- Start auto robbing
+            print("Auto Rob Enabled")
+            -- Add your auto rob logic here
+        else
+            -- Stop auto robbing
+            print("Auto Rob Disabled")
+            -- Add your code to stop auto robbing here
+        end
+    end
+})
+
+local NoClipToggle = AdditionalFeaturesTab:CreateToggle({
+    Name = "No Clip",
+    CurrentValue = false,
+    Flag = "NoClipToggle",
+    Callback = function(Value)
+        if Value then
+            -- Enable No Clip mode
+            print("No Clip Enabled")
+            -- Add No Clip logic here
+            local player = game.Players.LocalPlayer
+            player.Character.HumanoidRootPart.CanCollide = not Value
+        else
+            print("No Clip Disabled")
+            -- Add code to disable No Clip here
+            local player = game.Players.LocalPlayer
+            player.Character.HumanoidRootPart.CanCollide = not Value
+        end
+    end
+})
+
+local SpeedHackSlider = AdditionalFeaturesTab:CreateSlider({
+    Name = "Player Speed",
+    Range = {16, 500},
+    Increment = 1,
+    Suffix = "Speed",
+    CurrentValue = 16,
+    Flag = "SpeedHackSlider",
+    Callback = function(Value)
+        -- Adjust player speed
+        print("Player Speed:", Value)
+        local player = game.Players.LocalPlayer
+        local humanoid = player.Character and player.Character:FindFirstChildOfClass("Humanoid")
+        if humanoid then
+            humanoid.WalkSpeed = Value
+        end
+    end
+})
+
+local FlyToggle = AdditionalFeaturesTab:CreateToggle({
+    Name = "Fly",
+    CurrentValue = false,
+    Flag = "FlyToggle",
+    Callback = function(Value)
+        if Value then
+            -- Enable Fly mode
+            print("Fly Enabled")
+            local player = game.Players.LocalPlayer
+            local BodyVelocity = Instance.new("BodyVelocity", player.Character.PrimaryPart)
+            BodyVelocity.MaxForce = Vector3.new(4000, 4000, 4000)
+            local UserInputService = game:GetService("UserInputService")
+            UserInputService.InputBegan:Connect(function(input)
+                if input.KeyCode == Enum.KeyCode.Space then
+                    BodyVelocity.Velocity = Vector3.new(0, 50, 0)
+                end
+            end)
+        else
+            print("Fly Disabled")
+            -- Disable Fly mode
+            local player = game.Players.LocalPlayer
+            local BodyVelocity = player.Character.PrimaryPart:FindFirstChildOfClass("BodyVelocity")
+            if BodyVelocity then
+                BodyVelocity:Destroy()
+            end
+        end
+    end
+})
+
+local TeleportButton = AdditionalFeaturesTab:CreateButton({
+    Name = "Teleport to Random Location",
+    Callback = function()
+        local player = game.Players.LocalPlayer
+        local randomPosition = Vector3.new(math.random(-100, 100), 0, math.random(-100, 100))
+        player.Character:SetPrimaryPartCFrame(CFrame.new(randomPosition))
+        print("Teleported to Random Location")
+    end
+})
+
+-- Notifications Example
+Rayfield:Notify({
+    Title = "Script Loaded",
+    Content = "Jailbreak Hub is now active with advanced features!",
+    Duration = 5,
+    Image = nil,
+    Actions = {
+        Ignore = {
+            Name = "OK"
+        }
+    }
+})
